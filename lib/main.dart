@@ -8,9 +8,11 @@ class NavigationDrawerScreen extends StatefulWidget {
 } // class NavigationDrawerScreen
 
 class _NavigationDrawerScreenState extends State<NavigationDrawerScreen> {
+  final _messengerKey = GlobalKey<ScaffoldMessengerState>();
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      scaffoldMessengerKey: _messengerKey,
       home: Scaffold(
         appBar: AppBar(),
         drawer: Drawer(
@@ -42,7 +44,11 @@ class _NavigationDrawerScreenState extends State<NavigationDrawerScreen> {
               ListTile(
                 leading: const Icon(Icons.one_k),
                 title: const Text('Каталог'),
-                onTap: () {},
+                onTap: () {
+                  _messengerKey.currentState!.showSnackBar(
+                    const SnackBar(content: Text('Переход в каталог'))
+                  );
+                },
               ),
               ListTile(
                 leading: const Icon(Icons.two_k),
@@ -51,7 +57,7 @@ class _NavigationDrawerScreenState extends State<NavigationDrawerScreen> {
               ),
               const Divider(),
               const Padding(
-                padding: EdgeInsets.all(8.0),
+                padding: EdgeInsets.only(left:10.0),
                 child: Text('Профиль'),
               ),
               ListTile(
